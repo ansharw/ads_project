@@ -35,7 +35,6 @@ func (c *Product) ToResponseCreatedProduct() response.ResponseCreatedProduct {
 		ProductId:   c.productId,
 		ProductName: c.productName,
 		Description: c.description,
-		CreatedAt:   c.createdAt,
 	}
 }
 

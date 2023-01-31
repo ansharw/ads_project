@@ -5,6 +5,9 @@ import (
 	"ads_project/handler"
 	"ads_project/repository"
 	"ads_project/service"
+	"fmt"
+	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,8 +22,18 @@ func main() {
 	serviceProduct := service.NewProductService(db, repoProduct)
 	handlerProduct := handler.NewProductHandler(serviceProduct)
 
-	api.GET("/health")
-	api.GET("/time")
+	api.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status": "OK",
+		})
+	})
+	api.GET("/time", func(c *gin.Context) {
+		var now = time.Now()
+		c.JSON(http.StatusOK, gin.H{
+			"time":    fmt.Sprintf("Tanggal: %v %v %v Waktu: %v.%v.%v", now.Day(), now.Month(), now.Year(), now.Hour(), now.Minute(), now.Second()),
+			"message": "Hello, World!",
+		})
+	})
 
 	api.GET("/product", handlerProduct.FindAllProduct)
 	api.POST("/product", handlerProduct.Create)

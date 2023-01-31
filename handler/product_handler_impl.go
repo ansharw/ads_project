@@ -44,7 +44,6 @@ func (handler *productHandler) Create(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-
 	c.JSON(http.StatusOK, api.ApiResponse{
 		Code:   200,
 		Status: "Successfully create product data",
@@ -75,7 +74,7 @@ func (handler *productHandler) Update(c *gin.Context) {
 // Delete by id di requestbody
 // func (handler *productHandler) Delete(c *gin.Context) {
 // 	var req request.RequestDeletedProduct
-	
+
 // 	if err := c.ShouldBindJSON(&req); err != nil {
 // 		c.JSON(400, gin.H{"error": err.Error()})
 // 		return
