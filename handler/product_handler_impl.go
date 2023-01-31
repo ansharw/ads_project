@@ -44,6 +44,7 @@ func (handler *productHandler) Create(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
+	// fmt.Println(ProductCreated.ProductId)
 	c.JSON(http.StatusOK, api.ApiResponse{
 		Code:   200,
 		Status: "Successfully create product data",

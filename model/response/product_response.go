@@ -17,14 +17,15 @@ type ResponseProductById struct {
 }
 
 type ResponseCreatedProduct struct {
-	ProductId   int       `json:"product_id"`
+	// ProductId   int       `json:"product_id"`
 	ProductName string    `json:"product_name"`
 	Description string    `json:"description"`
+	// CreatedAt   time.Time `json:"created_at"`
 }
 
 type ResponseUpdatedProduct struct {
 	ProductId   int       `json:"product_id"`
 	ProductName string    `json:"product_name"`
 	Description string    `json:"description"`
-	CreatedAt   time.Time `json:"created_at"`
+	CreatedAt   string `json:"created_at"`
 }

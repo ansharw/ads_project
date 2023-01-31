@@ -78,7 +78,7 @@ func (service *productService) Update(ctx context.Context, request request.Reque
 		panic(err)
 	}
 	defer helper.CommitOrRollback(tx)
-	
+
 	product := service.repoProduct.FindById(ctx, tx, request.ProductId)
 	wg := sync.WaitGroup{}
 	wg.Add(2)
@@ -92,7 +92,7 @@ func (service *productService) Update(ctx context.Context, request request.Reque
 		wg.Done()
 	}()
 	wg.Wait()
-	
+
 	service.repoProduct.Update(ctx, tx, product)
 	return product.ToResponseUpdatedProduct(), err
 }

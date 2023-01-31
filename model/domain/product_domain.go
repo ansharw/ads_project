@@ -32,9 +32,10 @@ func (c *Product) ToResponseProductById() response.ResponseProductById {
 
 func (c *Product) ToResponseCreatedProduct() response.ResponseCreatedProduct {
 	return response.ResponseCreatedProduct{
-		ProductId:   c.productId,
+		// ProductId:   c.productId,
 		ProductName: c.productName,
 		Description: c.description,
+		// CreatedAt:   c.createdAt,
 	}
 }
 
@@ -43,7 +44,7 @@ func (c *Product) ToResponseUpdatedProduct() response.ResponseUpdatedProduct {
 		ProductId:   c.productId,
 		ProductName: c.productName,
 		Description: c.description,
-		CreatedAt:   c.createdAt,
+		CreatedAt:   c.createdAt.Format("2006-01-02 15:04:05"),
 	}
 }
 
@@ -64,6 +65,10 @@ func (c *Product) SetProductName(productName *string) {
 
 func (c *Product) SetDescription(description *string) {
 	c.description = *description
+}
+
+func (c *Product) SetCreatedAt(createdAt *time.Time) {
+	c.createdAt = *createdAt
 }
 
 func (c *Product) GetProduct() (*int, *string, *string, *time.Time) {
