@@ -1,0 +1,274 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "API Title",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9000/api"
+        }
+    ],
+    "paths": {
+        "/health":{
+            "get":{
+                "tags": [
+                    "health info"
+                ],
+                "description": "Health Info",
+                "responses": {
+                    "200":{
+                        "description": "Health Information",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/time":{
+            "get":{
+                "tags": [
+                    "Current Time"
+                ],
+                "description": "Current Time Info",
+                "responses": {
+                    "200":{
+                        "description": "Current Time Information",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "time":{
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product":{
+            "get":{
+                "tags": [
+                    "All Product"
+                ],
+                "description": "Get All Product",
+                "responses": {
+                    "200":{
+                        "description": "Successfully Get All Product",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "type": "object",
+                                                "properties": {
+                                                    "product_id":{
+                                                        "type": "number"
+                                                    },
+                                                    "product_name":{
+                                                        "type": "string"
+                                                    },
+                                                    "description":{
+                                                        "type": "string"
+                                                    },
+                                                    "created_at":{
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "tags": [
+                    "Create New Product"
+                ],
+                "description": "Create New Product",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "product_name":{
+                                        "type": "string"
+                                    },
+                                    "description":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Successfully create new product",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "type": "object",
+                                            "properties": {
+                                                "product_id":{
+                                                    "type": "number"
+                                                },
+                                                "product_name":{
+                                                    "type": "string"
+                                                },
+                                                "description":{
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "tags": [
+                    "Update Product"
+                ],
+                "description": "Update Product",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "product_id":{
+                                        "type": "number"
+                                    },
+                                    "product_name":{
+                                        "type": "string"
+                                    },
+                                    "description":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Successfully update product",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "type": "object",
+                                            "properties": {
+                                                "product_id":{
+                                                    "type": "number"
+                                                },
+                                                "product_name":{
+                                                    "type": "string"
+                                                },
+                                                "description":{
+                                                    "type": "string"
+                                                },
+                                                "created_at":{
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{product_id}":{
+            "delete":{
+                "tags": [
+                    "Delete Product"
+                ],
+                "description": "Update Product",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": true,
+                        "name": "product_id",
+                        "in": "path",
+                        "description": "Product Id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Successfully delete product",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
