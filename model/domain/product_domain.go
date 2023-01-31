@@ -17,7 +17,7 @@ func (c *Product) ToResponseAllProduct() response.ResponseAllProduct {
 		ProductId:   c.productId,
 		ProductName: c.productName,
 		Description: c.description,
-		CreatedAt:   c.createdAt,
+		CreatedAt:   c.createdAt.Format("2006-01-02 15:04:05"),
 	}
 }
 
@@ -32,10 +32,10 @@ func (c *Product) ToResponseProductById() response.ResponseProductById {
 
 func (c *Product) ToResponseCreatedProduct() response.ResponseCreatedProduct {
 	return response.ResponseCreatedProduct{
-		// ProductId:   c.productId,
+		ProductId:   c.productId,
 		ProductName: c.productName,
 		Description: c.description,
-		// CreatedAt:   c.createdAt,
+		CreatedAt:   c.createdAt.Format("2006-01-02 15:04:05"),
 	}
 }
 

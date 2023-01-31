@@ -4,6 +4,7 @@ import (
 	"ads_project/model/domain"
 	"context"
 	"database/sql"
+	"fmt"
 )
 
 type productRepository struct {
@@ -37,14 +38,16 @@ func (repo *productRepository) FindById(ctx context.Context, tx *sql.Tx, id int)
 }
 
 func (repo *productRepository) Create(ctx context.Context, tx *sql.Tx, product domain.Product) domain.Product {
-	query := "INSERT INTO product(product_name, product_description) VALUES (?, ?)"
-	res, err := tx.ExecContext(ctx, query, product.GetProductName(), product.GetDescription())
+	query := "INSERT INTO product(product_name, product_description, created_at) VALUES (?, ?, ?)"
+	res, err := tx.ExecContext(ctx, query, product.GetProductName(), product.GetDescription(), product.GetCreatedAt())
 	if err != nil {
 		panic(err)
 	}
 	lastId, _ := res.LastInsertId()
 	id := int(lastId)
+	fmt.Println("ini id dari insert ", id)
 	product.SetProductId(&id)
+	fmt.Println("product id: ", *product.GetProductId())
 	return product
 }
 

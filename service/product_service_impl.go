@@ -9,6 +9,7 @@ import (
 	"context"
 	"database/sql"
 	"sync"
+	"time"
 )
 
 type productService struct {
@@ -57,7 +58,7 @@ func (service *productService) Create(ctx context.Context, request request.Reque
 	defer helper.CommitOrRollback(tx)
 	dataProduct := domain.Product{}
 	wg := sync.WaitGroup{}
-	wg.Add(2)
+	wg.Add(3)
 	go func() {
 		dataProduct.SetProductName(&request.ProductName)
 		wg.Done()
@@ -65,6 +66,11 @@ func (service *productService) Create(ctx context.Context, request request.Reque
 
 	go func() {
 		dataProduct.SetDescription(&request.Description)
+		wg.Done()
+	}()
+	now := time.Now().UTC()
+	go func() {
+		dataProduct.SetCreatedAt(&now)
 		wg.Done()
 	}()
 	wg.Wait()

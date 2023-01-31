@@ -4,6 +4,7 @@ import (
 	"ads_project/model/api"
 	"ads_project/model/request"
 	"ads_project/service"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -44,7 +45,7 @@ func (handler *productHandler) Create(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-	// fmt.Println(ProductCreated.ProductId)
+	fmt.Println(ProductCreated)
 	c.JSON(http.StatusOK, api.ApiResponse{
 		Code:   200,
 		Status: "Successfully create product data",
